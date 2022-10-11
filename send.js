@@ -20,7 +20,7 @@ module.exports = function (req, res) {
             res.end(file);
         }
         else {
-            resNotFound(res);
+            resNotFound(res, req.url);
         }
     } catch (e) {resNotFound(res)}
 };
@@ -45,7 +45,7 @@ function getMime(ext) {
 }
 
 // ----------------------------------------------
-function resNotFound(res) {
+function resNotFound(res, s) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('File not found');
+    res.end(s || 'File not found');
 }
