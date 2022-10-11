@@ -3,13 +3,12 @@ let url = require('url'), util = require('util');
 require('./string');
 // *****************************************************************************************************
 console.log('-----^^^-----');
-let http = require('http'), ngame = require('./site/ngame'), sstatic = require('node-static');
-let file = new sstatic.Server('./site');
+let http = require('http'), ngame = require('./site/ngame'), file = require('./send');
 let game = ngame.fgame({secure: false, timeout: 300000});
 let server = http.createServer(function (req, res) {
     try {
         let u= req.url.mtch(/\/ghY34jkl\/\?data=(.+)/, 1);
-        if (!u){return file.serve(req, res)}
+        if (!u){return file(req, res)}
         req.url = decodeURIComponent(u);
         let host = url.parse(req.url).host;
         if (!host) return resEnd(res, 'Hello!!!');
