@@ -2,7 +2,7 @@ let url = require('url'), fs = require('fs');
 
 module.exports = function (req, res) {
     try {
-        let ext = '', pfile = 'site';
+        let ext = '', pfile = __dirname + '/site';
         if (req.url === '/') {
             pfile = pfile + '/index.html';
             ext = 'html';
